@@ -35,9 +35,10 @@ function App() {
     setNotice('');
 
     try {
-      const response = await axios.post(`${API_URL}/api/audit`, {
-  url,
-});
+    const response = await axios.post(
+  `${API_URL.replace(/\/$/, "")}/api/audit`,
+  { url }
+);
       setResult(response.data);
       setNotice('Audit completed successfully.');
     } catch (err) {
