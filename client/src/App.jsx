@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import axios from 'axios';
 import { FiCopy, FiDownload, FiMoon, FiSun, FiZap } from 'react-icons/fi';
 
-const API_URL = '/api/audit';
+const API_URL = import.meta.env.VITE_API_URL;
 
 const metricCards = [
   { key: 'status', label: 'HTTP Status', formatter: (value) => value },
@@ -35,7 +35,9 @@ function App() {
     setNotice('');
 
     try {
-      const response = await axios.post(API_URL, { url });
+      const response = await axios.post(`${API_URL}/api/audit`, {
+  url,
+});
       setResult(response.data);
       setNotice('Audit completed successfully.');
     } catch (err) {
